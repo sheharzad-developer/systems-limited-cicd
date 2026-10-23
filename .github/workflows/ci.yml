@@ -51,3 +51,10 @@ jobs:
           context: .
           push: true
           tags: ${{ steps.login-ecr.outputs.registry }}/${{ vars.ECR_REPOSITORY }}:${{ github.sha }}
+
+      - name: Diagnose AWS role ARN
+        env:
+          AWS_ROLE_ARN: ${{ vars.AWS_ROLE_ARN }}
+        run: |
+          echo "Role ARN length: ${#AWS_ROLE_ARN}"
+          printf 'Role ARN value: <%s>\n' "$AWS_ROLE_ARN"
